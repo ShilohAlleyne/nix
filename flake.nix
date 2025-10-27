@@ -8,15 +8,17 @@
 
         # Imported apps
         cube.url = "github:ShilohAlleyne/cube";
+        commie.url = "github:ShilohAlleyne/commie";
     };
 
-    outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils, cube, ... }:
+    outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils, cube, commie, ... }:
     flake-utils.lib.eachDefaultSystem (system:
         let
             pkgs-stable = import nixpkgs-unstable { inherit system; };
         in {
             # Re-export packages
             packages.cube = cube.packages.${system}.default;
+            packages.commie = commie.packages.${system}.default;
 
             # Optional: expose devShells
             # devShells.default = pkgs-stable.mkShell {
@@ -30,6 +32,11 @@
             apps.cube = {
                 type = "app";
                 program = "${cube.packages.${system}.default}/bin/cube";
+            };
+
+            apps.commie = {
+                type = "app";
+                program = "${commie.packages.${system}.default}/bin/cube";
             };
 
             # Default app (optional)
