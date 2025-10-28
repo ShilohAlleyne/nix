@@ -18,7 +18,7 @@
         in {
             # Re-export packages
             packages.cube = cube.packages.${system}.default;
-            packages.commie = commie.packages.${system}.commie;
+            packages.commie = commie.packages.${system}.default;
 
             # Optional: expose devShells
             # devShells.default = pkgs-stable.mkShell {
@@ -36,7 +36,7 @@
 
             apps.commie = {
                 type = "app";
-                program = "${commie.packages.${system}.commie}/bin/cube";
+                program = "${commie.packages.${system}.default}/bin/commie";
             };
 
             # Default app (optional)
